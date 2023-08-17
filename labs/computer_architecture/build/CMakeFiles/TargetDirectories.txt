@@ -1,3 +1,0 @@
-/Users/edwardglockner/OneDrive - Uppsala universitet/PDC/labs/computer_architecture/build/CMakeFiles/laplace.dir
-/Users/edwardglockner/OneDrive - Uppsala universitet/PDC/labs/computer_architecture/build/CMakeFiles/edit_cache.dir
-/Users/edwardglockner/OneDrive - Uppsala universitet/PDC/labs/computer_architecture/build/CMakeFiles/rebuild_cache.dir
