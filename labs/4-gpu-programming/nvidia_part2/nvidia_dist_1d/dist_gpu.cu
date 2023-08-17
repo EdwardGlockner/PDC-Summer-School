@@ -1,7 +1,6 @@
 #include <sys/time.h>
 #include <stdio.h>
 #include <math.h> //Include standard math library containing sqrt.
-
 #define TPB 128    // Specify threads per block
 
 // Timer
@@ -50,7 +49,6 @@ int main(int argc, char** argv)
   distanceKernel<<<N/TPB, TPB>>>(d_out, ref, N);
   cudaDeviceSynchronize();
   double iElaps = get_cpu_millisecond() - iStart;
-  
 
   // copy output from device memory to host memory
   cudaMemcpy(h_out, d_out, N*sizeof(float), cudaMemcpyDeviceToHost);

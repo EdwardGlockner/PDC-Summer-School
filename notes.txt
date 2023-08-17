@@ -1,0 +1,14 @@
+INIT KEBERNOS (i think)
+kinit -f edwardgl@NADA.KTH.SE
+
+SSH INTO DARDEL
+ssh -o GSSAPIDelegateCredentials=yes -o GSSAPIAuthentication=yes edwardgl@dardel.pdc.kth.se
+
+REMINDERS
+Don't run in login node
+Only salloc once
+
+GENERAL NOTES
+nvidia compute: details->speed of light and occupancy and roof line
+
+http://horacio9573.no-ip.org/cuda/group__CUDART__MEMORY_g48efa06b81cc031b2aa6fdc2e9930741.html
