@@ -12,3 +12,21 @@ GENERAL NOTES
 nvidia compute: details->speed of light and occupancy and roof line
 
 http://horacio9573.no-ip.org/cuda/group__CUDART__MEMORY_g48efa06b81cc031b2aa6fdc2e9930741.html
+
+salloc --res=lab-08-18 -A edu23.summer -p gpu --nodes=1 -t 00:20:00
+
+DARDEL COMMANDS
+// LIST LOADED MODULES
+module list
+// LOAD PDC MODULE
+ml PDC
+// CHECK WHICH ALLOCATIONS ARE ACTIVE
+squeue -u edwardgl
+// CANCEL ALLOCATION
+scancel jobid
+// LIST KEBERNOS
+klist
+// LOAD VIM MODULE
+ml PDC vim
+// CHECK GPUS
+srun -n 1 rocm-smi

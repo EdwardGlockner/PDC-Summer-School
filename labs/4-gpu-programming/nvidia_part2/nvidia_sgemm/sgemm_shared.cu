@@ -10,8 +10,6 @@
 
 __global__ void gemm(DataType *B, DataType *A, DataType *C, int numARows,
                       int numAColumns, int numBRows, int numBColumns){
-
-  // Code for shared memory here
   __shared__ float tA[TILE_WIDTH][TILE_HEIGHT]; // can't be dynamically allocated
   __shared__ float tB[TILE_WIDTH][TILE_HEIGHT];
 
@@ -19,45 +17,29 @@ __global__ void gemm(DataType *B, DataType *A, DataType *C, int numARows,
   const unsigned int by = TILE_HEIGHT;
   const unsigned int tx = threadIdx.x;
   const unsigned int ty = threadIdx.y;
-  const unsigned int I = blockIdx.x*bx + tx;
-  const unsigned int J = blockIdx.y*by + ty; 
+  const unsigned int col = blockIdx.x*bx + tx;
+  const unsigned int row = blockIdx.y*by + ty; 
   const unsigned int gx = gridDim.x;
   const unsigned int gy = gridDim.y;
 
-  const unsigned int N = 128;
+  const unsigned int N = 128; // size of matrix, shouldn't be hard coded
 
-
-  if ((J < numARows) && (I < numBColumns)) {
+  if ((row < numARows) && (col < numBColumns)) {
 
     float c = 0.0f;
     for (unsigned int k=0; k < gy; k++){
-      tA[tx][ty] = A[ I*N+k*by+ty];
-      tB[ty][tx] = B[J+N*(k*bx+tx)];
+      tA[tx][ty] = A[col*N + k*by + ty];
+      tB[ty][tx] = B[row + N*(k*bx + tx)];
+
       __syncthreads(); // Synchronizes all threads in a block for (unsigned int kk=0; kk< bx; kk++)
-      for (unsigned int kk=0; kk< bx; kk++)
+
+      for (unsigned int kk=0; kk< bx; kk++) {
         c += tA[kk][tx]*tB[kk][ty];
+      }
       __syncthreads(); // Avoids memory hazards
-        
     }
-    C[I*N+J] = c;
+    C[col*N+row] = c;
   }
-
-
-
-
-
-  /*
-  //@@ Insert code to implement matrix multiplication here
-  int row = blockIdx.y * blockDim.y + threadIdx.y;
-  int col = blockIdx.x * blockDim.x + threadIdx.x;
-  if (row < numARows && col < numBColumns) {
-    DataType sum = 0;
-    for (int ii = 0; ii < numAColumns; ii++) {
-      sum += A[row * numAColumns + ii] * B[ii * numBColumns + col];
-    }
-    C[row * numBColumns + col] = sum;
-  }
-  */
 }
 
 //@@ Insert code to implement timer
