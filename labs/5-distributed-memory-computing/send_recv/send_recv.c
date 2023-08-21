@@ -18,10 +18,10 @@ int main(int argc, char *argv[] )
     MPI_Send(&value, 4, MPI_INT, 0, 17, MPI_COMM_WORLD);
   } 
   else {
-    printf( "Process %d got %d\n", rank, value );
     if (rank < size - 1) {
       MPI_Recv(&value2, 4, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
     }
+    printf( "Process %d got %d\n", rank, value );
   }
   MPI_Finalize( );
   return 0;
