@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "mpi.h"
 
 void srandom (unsigned seed);
 double dboard (int darts);
@@ -17,30 +16,19 @@ int main (int argc, char *argv[])
           pisum;          /* sum of workers pi values */
   int     i, n;
 
-  int rank;
-  MPI_Status status;
-  int numtasks;
-
-  MPI_Init(&argc, &argv);
-  MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-  srandom (rank);
+  srandom (0);
 
   avepi = 0;
   for (i = 0; i < ROUNDS; i++) {
-      if (rank == 0) {
-        MPI_Recv(&pi, 100, MPI_DOUBLE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-        avepi = ((avepi * i) + pirecv)/(i + 1);
-        printf("After %8d throws, average value of pi = %10.8f\n", (DARTS * (i + 1)), avepi);
-      }
-      else {
-        homepi = dboard(DARTS);
-        MPI_Send(&homepi, 100, MPI_DOUBLE, 0, 17, MPI_COMM_WORLD);
-      }
+    pi = dboard(DARTS);
+
+    /* Master calculates the average value of pi over all iterations */
+    avepi = ((avepi * i) + pi)/(i + 1); 
+    printf("   After %8d throws, average value of pi = %10.8f\n",
+           (DARTS * (i + 1)),avepi);
+
   } 
-   
-  MPI_Finalize();
+
   return 0;
 }
 
