@@ -33,7 +33,7 @@ int main (int argc, char *argv[])
 
   for (i = 0; i < ROUNDS; i++) {
       if (rank == 0) {
-        MPI_Recv(&pirecv, 1, MPI_DOUBLE, 1, 17, MPI_COMM_WORLD, &status);
+        MPI_Recv(&pirecv, numtasks-1, MPI_DOUBLE, 1, 17, MPI_COMM_WORLD, &status);
 	avepi = ((avepi * i) + pirecv)/(i + 1);
         printf("After %8d throws, average value of pi = %10.8f\n", (DARTS * (i + 1)), avepi);
       }

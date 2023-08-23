@@ -19,7 +19,7 @@ salloc --res=lab-08-18 -A edu23.summer -p gpu --nodes=1 -t 00:20:00
 salloc -N 1 -A edu23.summer -t 0:20:00 -p main --cpus-per-task = 64
 
 // MPI
-salloc -N 1 -A edu23.summer -t 0:20:00 -p main --tasks = 64
+salloc -N 1 -A edu23.summer -t 0:20:00 -p main --tasks=64 --res=lab-08-22
 
 salloc -N 12 -A edu23.summer -t 0:10:00 -p shared
 

@@ -32,13 +32,13 @@
 #define    cp_open_file(name) fopen(name,"r")
 #endif
 
+
 /* Function to get wall time */
 double cp_Wtime(){
     struct timeval tv;
     gettimeofday(&tv, NULL);
     return tv.tv_sec + 1.0e-6 * tv.tv_usec;
 }
-
 
 #define THRESHOLD    0.001f
 
@@ -47,6 +47,7 @@ typedef struct {
     int size;    // Number of particles
     int *posval; // Positions and values
 } Storm;
+
 
 /* THIS FUNCTION CAN BE MODIFIED */
 /* Function to update a single position of the layer */
@@ -107,6 +108,7 @@ void debug_print(int layer_size, float *layer, int *positions, float *maximum, i
     }
 }
 
+
 /*
  * Function: Read data of particle storms from a file
  */
@@ -144,6 +146,7 @@ Storm read_storm_file( char *fname ) {
 
     return storm;
 }
+
 
 /*
  * MAIN PROGRAM

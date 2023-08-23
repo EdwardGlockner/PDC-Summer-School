@@ -48,6 +48,7 @@ typedef struct {
     int *posval; // Positions and values
 } Storm;
 
+
 /* THIS FUNCTION CAN BE MODIFIED */
 /* Function to update a single position of the layer */
 void update( float *layer, int layer_size, int k, int pos, float energy ) {
@@ -107,6 +108,7 @@ void debug_print(int layer_size, float *layer, int *positions, float *maximum, i
     }
 }
 
+
 /*
  * Function: Read data of particle storms from a file
  */
@@ -144,6 +146,7 @@ Storm read_storm_file( char *fname ) {
 
     return storm;
 }
+
 
 /*
  * MAIN PROGRAM
