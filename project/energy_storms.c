@@ -14,7 +14,6 @@
  * This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
  * https://creativecommons.org/licenses/by-sa/4.0/
  */
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
@@ -27,6 +26,7 @@ double cp_Wtime(){
     return tv.tv_sec + 1.0e-6 * tv.tv_usec;
 }
 
+
 #define THRESHOLD    0.001f
 
 /* Structure used to store data for one storm of particles */
@@ -34,7 +34,6 @@ typedef struct {
     int size;    // Number of particles
     int *posval; // Positions and values
 } Storm;
-
 
 /* THIS FUNCTION CAN BE MODIFIED */
 /* Function to update a single position of the layer */
@@ -95,7 +94,6 @@ void debug_print(int layer_size, float *layer, int *positions, float *maximum, i
     }
 }
 
-
 /*
  * Function: Read data of particle storms from a file
  */
@@ -133,7 +131,6 @@ Storm read_storm_file( char *fname ) {
 
     return storm;
 }
-
 
 /*
  * MAIN PROGRAM

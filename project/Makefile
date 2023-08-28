@@ -19,19 +19,21 @@
 
 # Compilers
 # Make sure you use the correct wrappers
-CC=gcc
-MPICC=mpicc
+#CC=gcc
+#Correct CC and MPICC for Dardel
+CC=cc
+MPICC=cc
 CUDACC=nvcc
 HIPCC=hipcc
 OMPFLAG= -fopenmp
 
 # Flags for optimization and libs
-FLAGS=-O3 -Wall
+FLAGS=-O3
 LIBS=-lm
 
 # Targets to build
 # change energy_storms_cuda to energy_storms_hip in order to build for hip instead
-OBJS=energy_storms_seq energy_storms_omp energy_storms_mpi energy_storms_cuda
+OBJS=energy_storms_seq energy_storms_omp energy_storms_mpi energy_storms_hip
 
 # Rules. By default show help
 help:
@@ -54,19 +56,19 @@ help:
 all: $(OBJS)
 
 energy_storms_seq: energy_storms.c
-	$(CC) $(DEBUG) $< $(LIBS) -o $@
+	$(CC) $(DEBUG) $(FLAGS) $< $(LIBS) -o $@
 
 energy_storms_omp: energy_storms_omp.c
-	$(CC) $(DEBUG) $(OMPFLAG) $< $(LIBS) -o $@
+	$(CC) $(DEBUG) $(OMPFLAG) $(FLAGS) $< $(LIBS) -o $@
 
 energy_storms_mpi: energy_storms_mpi.c
-	$(MPICC) $(DEBUG) $< $(LIBS) -o $@
+	$(MPICC) $(DEBUG) $(FLAGS) $< $(LIBS) -o $@
 
 energy_storms_cuda: energy_storms_cuda.cu
-	$(CUDACC) $(DEBUG) $< $(LIBS) -o $@
+	$(CUDACC) $(DEBUG) $(FLAGS) $< $(LIBS) -o $@
 
 energy_storms_hip: energy_storms_hip.hip
-	$(HIPCC) $(DEBUG) $< $(LIBS) -o $@
+	$(HIPCC) $(DEBUG) $(FLAGS) $< $(LIBS) -o $@
 
 # Remove the target files
 clean:
