@@ -1,3 +1,8 @@
+jag ska göra openMP
+c++ containers instead of malloc
+performance test cmake?? add if it exists
+update CMakeLists for openMP
+
 INIT KEBERNOS (i think)
 kinit -f edwardgl@NADA.KTH.SE
 
@@ -16,7 +21,7 @@ http://horacio9573.no-ip.org/cuda/group__CUDART__MEMORY_g48efa06b81cc031b2aa6fdc
 salloc --res=lab-08-18 -A edu23.summer -p gpu --nodes=1 -t 00:20:00
 
 // OPENMP
-salloc -N 1 -A edu23.summer -t 0:20:00 -p main --cpus-per-task = 64
+salloc -N 1 -A edu23.summer -t 0:20:00 -p main --cpus-per-task=64
 
 // MPI
 salloc -N 1 -A edu23.summer -t 0:20:00 -p main --tasks=64 --res=lab-08-22

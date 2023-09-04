@@ -1,0 +1,12 @@
+kinit -f edwardgl@NADA.KTH.SE
+
+ssh -o GSSAPIDelegateCredentials=yes -o GSSAPIAuthentication=yes edwardgl@dardel.pdc.kth.se
+
+salloc -N 1 -t 0:20:00 -A edu23.summer -p main
+
+ml PDC
+ml PDC vim
+
+scp -r project edwardgl@dardel.pdc.kth.se:/cfs/klemming/home/e/edwardgl
+
+srun -n 4 ./energy_storms_omp 50000 test_files/test_07_a1M_p5k_w1 test_files/test_07_a1M_p5k_w2
